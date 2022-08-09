@@ -1,0 +1,24 @@
+---
+---
+###yaml dopcumentation start with three dash
+- 
+#the minus in documentation indicates a list of item
+#it contians list of plays and each play will be an dictionary. 
+# target where your play will run
+  hosts: all 
+    
+  tasks:
+    - name: login to nexus pvt repo 
+      docker_login:
+      registry: http://54.243.105.5:8085
+      username: admin 
+      password: hetal123
+      reauthorize: yes
+    - name: ensure your container is running
+      docker_container:
+      name: chatapp
+      image: 54.243.105.5:8085/chatapp6
+      state: started
+      recreate: yes
+      exposed_ports:
+      - 82
